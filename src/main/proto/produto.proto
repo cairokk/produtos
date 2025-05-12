@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package produto;
+
+option java_package = "br.com.seuapp.grpc";
+option java_multiple_files = true;
+
+service ProdutoService {
+  rpc CriarProduto (ProdutoRequest) returns (ProdutoResponse);
+  rpc ListarProdutos (ListarProdutosRequest) returns (ListarProdutosResponse);
+  rpc BuscarProdutoPorId (ProdutoIdRequest) returns (ProdutoResponse);
+  rpc AlterarProduto (AlterarProdutoRequest) returns (ProdutoResponse);
+  rpc RemoverProduto (ProdutoIdRequest) returns (RemoverProdutoResponse);
+}
+
+message ProdutoRequest {
+  string name = 1;
+  double originalPrice = 2;
+  double discountedPrice = 3;
+  string category = 4;
+  string origin = 5;
+  string intensity = 6;
+  string beans = 7;
+}
+
+message ProdutoResponse {
+  int64 id = 1;
+  string name = 2;
+  double originalPrice = 3;
+  double discountedPrice = 4;
+  string category = 5;
+  string origin = 6;
+  string intensity = 7;
+  string beans = 8;
+}
+
+message ProdutoIdRequest {
+  int64 id = 1;
+}
+
+message AlterarProdutoRequest {
+  int64 id = 1;
+  ProdutoRequest produto = 2;
+}
+
+message RemoverProdutoResponse {
+  bool sucesso = 1;
+}
+
+message ListarProdutosRequest {
+  // pode ter filtros no futuro
+}
+
+message ListarProdutosResponse {
+  repeated ProdutoResponse produtos = 1;
+}
