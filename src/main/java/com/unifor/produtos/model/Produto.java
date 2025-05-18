@@ -12,6 +12,12 @@ public class Produto {
 
     private String name;
 
+    @Column(name = "id_fornecedor", nullable = false)
+    private Long idFornecedor;
+
+    @Column(name = "quantidade")
+    private int quantidade;
+
     @Column(name = "original_price", nullable = false)
     private BigDecimal originalPrice;
 
@@ -90,6 +96,22 @@ public class Produto {
 
     public void setBeans(String beans) {
         this.beans = beans;
+    }
+
+    public Long getIdFornecedor() {
+        return idFornecedor;
+    }
+
+    public void setIdFornecedor(Long idFornecedor) {
+        this.idFornecedor = idFornecedor;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }
 

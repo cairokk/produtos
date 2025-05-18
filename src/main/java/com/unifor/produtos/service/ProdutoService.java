@@ -30,6 +30,12 @@ public class ProdutoService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProdutoTO> listarProdutosFornecedor(Long id) {
+        return produtoRepository.findByIdFornecedor(id).stream()
+                .map(this::toTO)
+                .collect(Collectors.toList());
+    }
+
     // Buscar produto por id e retornar ProdutoTO
     public ProdutoTO buscarProdutoPorId(Long id) {
         return produtoRepository.findById(id)
@@ -47,6 +53,8 @@ public class ProdutoService {
             produtoExistente.setOrigin(produtoTO.getOrigin());
             produtoExistente.setIntensity(produtoTO.getIntensity());
             produtoExistente.setBeans(produtoTO.getBeans());
+            produtoExistente.setQuantidade(produtoTO.getQuantidade());
+            produtoExistente.setIdFornecedor(produtoTO.getIdFornecedor());
 
             Produto produtoAtualizado = produtoRepository.save(produtoExistente);
             return toTO(produtoAtualizado);
@@ -62,6 +70,8 @@ public class ProdutoService {
     private ProdutoTO toTO(Produto produto) {
         ProdutoTO to = new ProdutoTO();
         to.setId(produto.getId());
+        to.setIdFornecedor(produto.getIdFornecedor());
+        to.setQuantidade(produto.getQuantidade());
         to.setName(produto.getName());
         to.setOriginalPrice(produto.getOriginalPrice());
         to.setDiscountedPrice(produto.getDiscountedPrice());
@@ -75,6 +85,8 @@ public class ProdutoService {
     private Produto toEntity(ProdutoTO produtoTO) {
         Produto produto = new Produto();
         produto.setName(produtoTO.getName());
+        produto.setIdFornecedor(produtoTO.getIdFornecedor());
+        produto.setQuantidade(produtoTO.getQuantidade());
         produto.setOriginalPrice(produtoTO.getOriginalPrice());
         produto.setDiscountedPrice(produtoTO.getDiscountedPrice());
         produto.setCategory(produtoTO.getCategory());

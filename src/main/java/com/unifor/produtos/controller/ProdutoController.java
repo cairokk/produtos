@@ -39,6 +39,15 @@ public class ProdutoController {
         return ResponseEntity.ok(produtos);
     }
 
+    @GetMapping("/fornecedor/{id}")
+    @Operation(summary = "Listar todos os produtos de um fornecedor", responses = {
+            @ApiResponse(responseCode = "200", description = "Produtos listados com sucesso")
+    })
+    public ResponseEntity<List<ProdutoTO>> listarProdutosFornecedor(@PathVariable Long id) {
+        List<ProdutoTO> produtos = produtoService.listarProdutosFornecedor(id);
+        return ResponseEntity.ok(produtos);
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Buscar produto por ID", responses = {
             @ApiResponse(responseCode = "200", description = "Produto encontrado"),

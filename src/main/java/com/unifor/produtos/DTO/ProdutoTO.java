@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 public class ProdutoTO {
     private Long id;
     private String name;
+    private Long idFornecedor;
+    private int quantidade;
     private BigDecimal originalPrice;
     private BigDecimal discountedPrice;
     private String category;
@@ -74,5 +76,21 @@ public class ProdutoTO {
 
     public void setBeans(String beans) {
         this.beans = beans;
+    }
+
+    public Long getIdFornecedor() {
+        return idFornecedor;
+    }
+
+    public void setIdFornecedor(Long idFornecedor) {
+        this.idFornecedor = idFornecedor;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }
