@@ -61,6 +61,36 @@ public class ProdutoService {
         }).orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
     }
 
+    public void reduzirEstoque(Long idProduto, int quantidade) throws Exception {
+        System.out.println("Entrei no reduzir estoque");
+        Produto produto = produtoRepository.findById(idProduto).orElse(null);
+
+        if (produto == null) {
+            throw new Exception("Produto não encontrado!");
+        }
+
+        if (produto.getQuantidade() < quantidade){
+            throw new Exception("Quantidade não disponível!");
+        }
+
+        produto.setQuantidade(produto.getQuantidade() - quantidade);
+        System.out.println("nova quantidade " + produto.getQuantidade());
+        produtoRepository.save(produto);
+    }
+
+    public void reporEstoque(Long idProduto, int quantidade) throws Exception {
+        System.out.println("Entrei no reduzir estoque");
+        Produto produto = produtoRepository.findById(idProduto).orElse(null);
+
+        if (produto == null) {
+            throw new Exception("Produto não encontrado!");
+        }
+
+        produto.setQuantidade(produto.getQuantidade() + quantidade);
+        System.out.println("nova quantidade " + produto.getQuantidade());
+        produtoRepository.save(produto);
+    }
+
     // Remover produto por id
     public void removerProduto(Long id) {
         produtoRepository.deleteById(id);
